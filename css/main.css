@@ -99,12 +99,12 @@ textarea {
 /** Mobil Optimized First **/
 /************************************/
 .clock-container {
-  width: 200px;
+  width: 300px;
   height: auto;
   margin-left: 25px;
 }
 .title {
-  background-color: #4d967a;
+  background-color: #c8c6c6;
   margin: 0;
   padding: 0;
 }
@@ -115,17 +115,32 @@ textarea {
 .clock {
   margin: 0;
   padding: 0;
-  background-color: #cbd8d3;
+  background-color: #c8c6c6;
   padding-bottom: 5px;
 }
 
-.clock p {
+p {
   margin-block-start: 0em;
   margin-block-end: 0em;
   text-align: center;
-
+}
+.button {
+  display: flex;
+  justify-content: space-around;
+  margin: 10px 0;
 }
 
+.button-1 {
+  flex: 1;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.button-2 {
+  flex: 1;
+  width: 25px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
 
 /*******************************************************/
 /** Navbar Section **/
