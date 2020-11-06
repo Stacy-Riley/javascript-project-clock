@@ -1,79 +1,57 @@
-
-//var element = document.getElementById("clockElement")
+var today = new Date();
 var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
 					"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 var dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-function startTime(){
-	var today = new Date();
-	var weekDay = today.getDay();
-	var month = today.getMonth();
-	var dayNum = today.getDate();
-	var hours = today.getHours();
-	var m = today.getMinutes();
-	var s = today.getSeconds();
-	var meridian = "AM";
-	m = checkTime(m);
-	s = checkTime(s);
-/*This converts hours 13 - 24 to the range 1 - 12, 
-  and 0 back to 12:*/ 
-	if(hours > 12) {
-	hours -= 12;
-}else if (house === 0){
-	hours = 12;
-}
+var weekDay = today.getDay();
+var month = today.getMonth();
+var dayNum = today.getDate();
+let clock = document.getElementById('clockElement');
+let timer = null;
 
-	document.getElementById("clockElement").innerText = 
-	dayNames[weekDay] + " " + 
-	monthNames[month] + " " + 
-	hours + ":" + m + ":" + s + " " + meridian;
-	var t = setTimeout(startTime, 500);
-}
-
-
-//This makes the clock dynamic
-function checkTime(i){
-	if(i < 10){
-		i = "0" + i;
+/* ========================================================= */
+//When user clicks 12-hour display
+/* ========================================================= */
+document.getElementById("twelve").addEventListener("click", function(){
+	//This section will clear any previously running timer
+	if(timer !== null){
+		clearInterval(timer);
+		timer = null;
+		} else {
+		timer = setInterval(show12, 500);
 	}
-	return i;
-}
 
-startTime();
+	function show12(){
+		var today = new Date();
+		var time = 	dayNames[weekDay] + " " + 
+				monthNames[month] + " " + 
+				dayNum + " " +
+				today.toLocaleTimeString();
+		//This lines puts the time in the html <p> element
+		clock.textContent = time;
+	}
+})
 
-function changeTime(){
-	var today = new Date();
-	var weekDay = today.getDay();
-	var month = today.getMonth();
-	var dayNum = today.getDate();
-	var hours = today.getHours();
-	var m = today.getMinutes();
-	var s = today.getSeconds();
-	var meridian = "AM";
-	m = checkTime(m);
-	s = checkTime(s);
-/*This converts hours 13 - 24 to the range 1 - 12, 
-  and 0 back to 12:
-	if(hours > 12) {
-	hours -= 12;
-}else if (house === 0){
-	hours = 12;
-}
-*/
-	document.getElementById("clockElement").innerText = 
-	dayNames[weekDay] + " " + 
-	monthNames[month] + " " + 
-	hours + ":" + m + ":" + s + " " + meridian;
-	var t = setTimeout(startTime, 500);
-}
+/* ========================================================= */
+//When user clicks 24-hour display
+/* ========================================================= */
+document.getElementById("twentyfour").addEventListener("click", function(){
+	//This section will clear any previously running timer
+	if(timer !== null){
+			clearInterval(timer);
+			timer = null;
+		} else {
+		timer = setInterval(show24, 500);
+	}
 
-changeTime()
-/*	
-function startTime24(){
-	document.getElementById("clockElement").innerText = 
-	dayNames[weekDay] + " " + monthNames[month] + " " + hours + ":" + m + ":" + s + " " + meridian;
-	var t = setTimeout(startTime24, 500);
-}
-
-startTime24();
-*/
+	function show24(){
+		var today = new Date();
+		var time = 	dayNames[weekDay] + " " + 
+				monthNames[month] + " " + 
+				dayNum + " " +
+				today.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit',hour12: false});
+	
+		//This lines puts the time in the html <p> element
+		clock.textContent = time;
+	}
+})
